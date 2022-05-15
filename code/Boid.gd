@@ -8,9 +8,12 @@ export var align = 0.05
 export var time = 1.0
 export var vision = 15
 export var boundary = 300
+export var edgeforce = 1.0
 
 var V = Vector2(randf()-0.5, randf()-0.5) * limit
 var species = 0
+
+# BEHAVIOUR
 
 func s(A, B) -> float:
 	var components = Vector2(A.x - B.x, A.y - B.y)
@@ -74,17 +77,17 @@ func alignment(near):
 		V.y += avg_speed.y * align
 
 func manage():
+	# Prevent from running away too far
+	if abs(position.x) > boundary:
+		V.x += edgeforce * (boundary * sign(position.x) - position.x)
+	if abs(position.y) > boundary:
+		V.y += edgeforce * (boundary * sign(position.y) - position.y)
+	
 	# Speedlimit
 	var speed = sqrt(pow(V.x, 2.0) + pow(V.y, 2.0))
 	if speed > limit:
 		V.x = V.x * limit/speed
 		V.y = V.y * limit/speed
-		
-	# Prevent from running away too far
-	if abs(position.x) > boundary:
-		position.x = -sign(position.x) * boundary
-	if abs(position.y) > boundary:
-		position.y = -sign(position.y) * boundary
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
