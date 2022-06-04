@@ -7,6 +7,7 @@
 
 [node name="Spawner" type="Node2D" parent="."]
 script = ExtResource( 2 )
+no_species = 4
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true

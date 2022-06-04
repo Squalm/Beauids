@@ -2,7 +2,7 @@ extends Node2D
 
 
 export var limit = 15
-export var push = 15
+export var push = 30
 export var centerpull = 0.05
 export var align = 0.05
 export var time = 1.0
@@ -17,17 +17,13 @@ var species = 0
 
 func s(A, B) -> float:
 	var components = Vector2(A.x - B.x, A.y - B.y)
-	if abs(A.x - B.x) > boundary:
-		components.x = boundary * 2 - abs(components.x)
-	if abs(A.y - B.y) > boundary:
-		components.y = boundary * 2 - abs(components.y)
 	
 	return sqrt(pow(components.x, 2.0) + pow(components.y, 2.0))
 
-func nearby() -> Array:
+func nearby(radius) -> Array:
 	var near = []
 	for b in get_parent().get_children():
-		if s(position, b.position) <= vision and b.position != position:
+		if s(position, b.position) <= radius and b.position != position:
 			near.push_back(b)
 	return near
 
@@ -89,15 +85,24 @@ func manage():
 		V.x = V.x * limit/speed
 		V.y = V.y * limit/speed
 
+func _ready():
+	emit_signal("draw")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
-	var near = nearby()
+	var near = nearby(vision)
 	
 	separation(near)
 	cohesion(near)
 	alignment(near)
 	manage()
+	update()
 	
 	position += V * time * delta
+	
+
+func _draw():
+	var nearer = nearby(vision)
+	for b in nearer:
+		draw_line(Vector2(0,0) , b.position-position, Color(1,1,1, 1-s(position, b.position) / vision))

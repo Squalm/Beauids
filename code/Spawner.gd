@@ -21,4 +21,4 @@ func _process(delta):
 		boid_new.species = species
 		add_child(boid_new)
 	
-	emit_signal("get_boids", get_children())
+	#emit_signal("get_boids", get_children())
