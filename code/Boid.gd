@@ -12,6 +12,7 @@ export var edgeforce = 1.0
 
 var V = Vector2(randf()-0.5, randf()-0.5) * limit
 var species = 0
+var elapsed = 0.0
 
 # BEHAVIOUR
 
@@ -99,7 +100,9 @@ func _process(delta):
 	manage()
 	update()
 	
-	position += V * time * delta
+	elapsed = elapsed + delta
+	var sin_time = sin(elapsed*time)/2+0.5
+	position += V * sin_time * delta
 	
 
 func _draw():
