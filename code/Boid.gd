@@ -3,12 +3,13 @@ extends Node2D
 
 export var limit = 15
 export var push = 30
-export var centerpull = 0.05
+export var centerpull = 0.05 # cohesion
 export var align = 0.05
 export var time = 1.0
 export var vision = 15
 export var boundary = 300
 export var edgeforce = 1.0
+export var sin_type = false
 
 var V = Vector2(randf()-0.5, randf()-0.5) * limit
 var species = 0
@@ -101,11 +102,14 @@ func _process(delta):
 	update()
 	
 	elapsed = elapsed + delta
-	var sin_time = sin(elapsed*time)/2+0.5
-	position += V * sin_time * delta
+	if sin_type:
+		var sin_time = sin(elapsed*time)/2+0.5
+		position += V * sin_time * delta
+	else:
+		position += V * time * delta
 	
 
 func _draw():
 	var nearer = nearby(vision)
 	for b in nearer:
-		draw_line(Vector2(0,0) , b.position-position, Color(1,1,1, 1-s(position, b.position) / vision))
+		draw_line(Vector2(0,0) , b.position-position, Color(1,1,1, 1-s(position, b.position) / vision), 1.0, true)

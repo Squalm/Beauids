@@ -14,4 +14,87 @@ current = true
 
 [node name="Points" parent="." instance=ExtResource( 1 )]
 
+[node name="SpeciesSlider" type="HSlider" parent="."]
+margin_left = -500.0
+margin_top = -290.0
+margin_right = -330.0
+margin_bottom = -260.0
+min_value = 1.0
+max_value = 6.0
+value = 3.0
+tick_count = 6
+ticks_on_borders = true
+
+[node name="CohesionSlider" type="HSlider" parent="."]
+margin_left = -500.0
+margin_top = -260.0
+margin_right = -330.0
+margin_bottom = -230.0
+max_value = 0.1
+step = 0.01
+value = 0.05
+tick_count = 11
+ticks_on_borders = true
+
+[node name="AlignmentSlider" type="HSlider" parent="."]
+margin_left = -500.0
+margin_top = -230.0
+margin_right = -330.0
+margin_bottom = -200.0
+max_value = 0.1
+step = 0.01
+value = 0.05
+tick_count = 11
+ticks_on_borders = true
+
+[node name="SeparationSlider" type="HSlider" parent="."]
+margin_left = -500.0
+margin_top = -200.0
+margin_right = -330.0
+margin_bottom = -170.0
+max_value = 300.0
+step = 10.0
+value = 30.0
+tick_count = 11
+ticks_on_borders = true
+
+[node name="VisionSlider" type="HSlider" parent="."]
+margin_left = -500.0
+margin_top = -170.0
+margin_right = -330.0
+margin_bottom = -140.0
+step = 5.0
+value = 15.0
+tick_count = 11
+ticks_on_borders = true
+
+[node name="SpeedSlider" type="HSlider" parent="."]
+margin_left = -500.0
+margin_top = -140.0
+margin_right = -330.0
+margin_bottom = -110.0
+max_value = 1.0
+step = 0.1
+value = 1.0
+tick_count = 11
+ticks_on_borders = true
+
+[node name="BoundarySlider" type="HSlider" parent="."]
+margin_left = -500.0
+margin_top = -110.0
+margin_right = -330.0
+margin_bottom = -80.0
+max_value = 400.0
+step = 50.0
+value = 300.0
+tick_count = 9
+ticks_on_borders = true
+
 [connection signal="get_boids" from="Spawner" to="Points" method="_on_Spawner_get_boids"]
+[connection signal="value_changed" from="SpeciesSlider" to="Spawner" method="_on_SpeciesSlider_value_changed"]
+[connection signal="value_changed" from="CohesionSlider" to="Spawner" method="_on_CohesionSlider_value_changed"]
+[connection signal="value_changed" from="AlignmentSlider" to="Spawner" method="_on_AlignmentSlider_value_changed"]
+[connection signal="value_changed" from="SeparationSlider" to="Spawner" method="_on_SeparationSlider_value_changed"]
+[connection signal="value_changed" from="VisionSlider" to="Spawner" method="_on_VisionSlider_value_changed"]
+[connection signal="value_changed" from="SpeedSlider" to="Spawner" method="_on_SpeedSlider_value_changed"]
+[connection signal="value_changed" from="BoundarySlider" to="Spawner" method="_on_BoundarySlider_value_changed"]

@@ -22,3 +22,40 @@ func _process(delta):
 		add_child(boid_new)
 	
 	#emit_signal("get_boids", get_children())
+
+
+func _on_SpeciesSlider_value_changed(value: float) -> void:
+	no_species = value
+	for boid in get_children():
+		boid.species = int(rand_range(0.0, no_species))
+		boid.modulate = colors[boid.species]
+
+
+func _on_CohesionSlider_value_changed(value: float) -> void:
+	for boid in get_children():
+		boid.centerpull = value
+
+
+func _on_AlignmentSlider_value_changed(value: float) -> void:
+	for boid in get_children():
+		boid.align = value
+
+
+func _on_SeparationSlider_value_changed(value: float) -> void:
+	for boid in get_children():
+		boid.push = value
+
+
+func _on_VisionSlider_value_changed(value: float) -> void:
+	for boid in get_children():
+		boid.vision = value
+
+
+func _on_SpeedSlider_value_changed(value: float) -> void:
+	for boid in get_children():
+		boid.time = value
+
+
+func _on_BoundarySlider_value_changed(value: float) -> void:
+	for boid in get_children():
+		boid.boundary = value
