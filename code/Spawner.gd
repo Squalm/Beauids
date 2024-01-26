@@ -2,7 +2,7 @@ extends Node2D
 
 
 # Declare member variables here. 
-export var no_species = 2
+@export var no_species = 2
 
 var boid_scene = preload("res://scenes/Boid.tscn")
 var colors = [Color(1, 0, 0), Color(0, 1, 0), Color(0, 0, 1), Color(0, 1, 1), Color(1, 0, 1), Color(1, 1, 0)]
@@ -12,10 +12,10 @@ signal get_boids(boids)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_mouse_button_pressed(BUTTON_LEFT):
-		var boid_new = boid_scene.instance()
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		var boid_new = boid_scene.instantiate()
 		boid_new.position = get_local_mouse_position()
-		var species = int(rand_range(0.0, no_species))
+		var species = int(randf_range(0.0, no_species))
 		boid_new.modulate = colors[species]
 		# Must be a better way to do this:
 		boid_new.species = species
@@ -27,7 +27,7 @@ func _process(delta):
 func _on_SpeciesSlider_value_changed(value: float) -> void:
 	no_species = value
 	for boid in get_children():
-		boid.species = int(rand_range(0.0, no_species))
+		boid.species = int(randf_range(0.0, no_species))
 		boid.modulate = colors[boid.species]
 
 

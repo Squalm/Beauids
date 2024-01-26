@@ -8,4 +8,4 @@ limit = 50
 push = 50
 vision = 80
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]

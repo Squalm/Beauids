@@ -2,8 +2,8 @@ extends Node2D
 
 
 # Declare member variables here. Examples:
-export var no_points = 20
-export var boundary = 300
+@export var no_points = 20
+@export var boundary = 300
 
 var points = []
 var radius = 5
